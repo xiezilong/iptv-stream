@@ -1,0 +1,10 @@
+儿童频道,#genre#
+金鹰卡通,http://125.43.249.76:9901/tsfile/live/1040_1.m3u8?key=txiptv&playlive=1&authid=0
+浙江少儿,http://ali-m-l.cztv.com/channels/lantian/channel008/1080p.m3u8
+七龙珠,https://live.metshop.top/huya/11601966
+中华小当家,https://live.metshop.top/huya/11342413
+海绵宝宝,https://live.metshop.top/douyu/3949681
+猫和老鼠,https://live.metshop.top/huya/11352879
+福州少儿,http://live.zohi.tv/video/s10001-fztv-4/index.m3u8
+韩国EBS少儿,http://ebsonairios.ebs.co.kr/ebsutablet500k/tablet500k/playlist.m3u8
+黑龙江少儿,https://ls.qingting.fm/live/4972/64k.m3u8
