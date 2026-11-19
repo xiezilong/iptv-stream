@@ -1,10 +1,10 @@
 name: Sync iptv-org lists
 
-# iptv-org 的列表每天都会变动，定时重新下载并提交，
-# 服务端每小时拉取本仓库时就能拿到较新的地址。
+# iptv-org 的列表会持续变动，每 2 小时重新下载并提交，
+# 服务端直连失败时可以用这里的快照兜底。
 on:
   schedule:
-    - cron: "17 3 * * *"
+    - cron: "17 */2 * * *"
   workflow_dispatch:
 
 permissions:
