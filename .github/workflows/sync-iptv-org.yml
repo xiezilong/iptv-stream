@@ -1,0 +1,46 @@
+name: Sync iptv-org lists
+
+# iptv-org 的列表每天都会变动，定时重新下载并提交，
+# 服务端每小时拉取本仓库时就能拿到较新的地址。
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download lists
+        run: |
+          set -euo pipefail
+          base="https://iptv-org.github.io/iptv"
+          ua="Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+          mkdir -p iptv-org
+          fetch() {
+            curl -fsSL --max-time 60 -A "$ua" "$base/$1" -o "iptv-org/$2"
+            grep -q '#EXTM3U' "iptv-org/$2"
+          }
+          fetch countries/cn.m3u cn.m3u
+          fetch categories/kids.m3u kids.m3u
+          fetch categories/education.m3u education.m3u
+          fetch categories/movies.m3u movies.m3u
+          fetch categories/music.m3u music.m3u
+          fetch categories/news.m3u news.m3u
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add iptv-org
+          if git diff --cached --quiet; then
+            echo "no changes"
+            exit 0
+          fi
+          git commit -m "chore: sync iptv-org lists"
+          git push
